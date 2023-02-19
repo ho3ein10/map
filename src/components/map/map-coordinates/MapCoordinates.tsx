@@ -3,9 +3,10 @@ import React, { useState } from "react";
 // Leaflet Framework:
 import { useMap, useMapEvents } from "react-leaflet";
 // MUI Components:
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 
-const MapCoordinates = () => {
+const CoordinatesBox = () => {
+  const theme = useTheme();
   const map = useMap();
 
   const [zoomLevel, setZoomLevel] = useState(map.getZoom());
@@ -29,7 +30,7 @@ const MapCoordinates = () => {
       sx={{
         width: "100%",
         height: "25px",
-        backgroundColor: "rgba(130,130,130,0.9)",
+        backgroundColor: "rgba(0,0,0,0.7)",
         color: "white",
         p: "2px",
         position: "absolute",
@@ -44,59 +45,172 @@ const MapCoordinates = () => {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "space-around",
+          justifyContent: "flex-start",
           alignzitems: "center",
           mr: "10px",
         }}
       >
-        <Typography
+        <Box
           sx={{
-            width: "200px",
+            display: "flex",
+            justifyContent: "flex-start",
+            alignzitems: "center",
+            width: "240px",
             fontSize: "14px",
-            fontFamily: "Arial, Helvetica, sans-serif",
+            ml:"8px",
+            [theme.breakpoints.down("sm")]: {
+              width: "210px",
+              fontSize: "12px",
+            },
+            [theme.breakpoints.down(530)]: {
+              width: "180px",
+            },
+            [theme.breakpoints.down(480)]: {
+              width: "155px",
+            },
+            [theme.breakpoints.down(420)]: {
+              width: "135px",
+            },
+            [theme.breakpoints.down(380)]: {
+              width: "100px",
+            },
           }}
         >
-          Lat:
-          <Box component="span" sx={{ color: "aqua", mr: "8px" }}>
+          <Typography
+            sx={{
+              fontSize: "inherit",
+              whiteSpace: "nowrap",
+              [theme.breakpoints.down(420)]: {
+                display: "none",
+              },
+            }}
+          >
+            عرض جغرافیایی :
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: "inherit",
+              whiteSpace: "nowrap",
+              [theme.breakpoints.up(420)]: {
+                display: "none",
+              },
+            }}
+          >
+            عرض :
+          </Typography>
+
+          <Typography
+            sx={{
+              fontSize: "inherit",
+              color: "aqua",
+              mr: "6px",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+          >
             {coordinates.lat > 0 ? "+" + coordinates.lat : coordinates.lat}
-          </Box>
-        </Typography>
-        <Typography
+          </Typography>
+        </Box>
+
+        <Box
           sx={{
-            width: "200px",
+            display: "flex",
+            justifyContent: "flex-start",
+            alignzitems: "center",
+            width: "240px",
             fontSize: "14px",
-            fontFamily: "Arial, Helvetica, sans-serif",
+            [theme.breakpoints.down("sm")]: {
+              width: "210px",
+              fontSize: "12px",
+            },
+            [theme.breakpoints.down(530)]: {
+              width: "180px",
+            },
+            [theme.breakpoints.down(480)]: {
+              width: "155px",
+            },
+            [theme.breakpoints.down(420)]: {
+              width: "135px",
+            },
+            [theme.breakpoints.down(380)]: {
+              width: "100px",
+            },
           }}
         >
-          Long:
-          <Box component="span" sx={{ color: "aqua", mr: "8px" }}>
+          <Typography
+            sx={{
+              fontSize: "inherit",
+              whiteSpace: "nowrap",
+              [theme.breakpoints.down(420)]: {
+                display: "none",
+              },
+            }}
+          >
+            طول جغرافیایی :
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: "inherit",
+              whiteSpace: "nowrap",
+              [theme.breakpoints.up(420)]: {
+                display: "none",
+              },
+            }}
+          >
+            طول :
+          </Typography>
+
+          <Typography
+            sx={{
+              fontSize: "inherit",
+              color: "aqua",
+              mr: "6px",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+          >
             {coordinates.long > 0 ? "+" + coordinates.long : coordinates.long}
-          </Box>
-        </Typography>
+          </Typography>
+        </Box>
       </Box>
 
       <Box
         sx={{
           display: "flex",
-          justifyContent: "space-around",
           alignzitems: "center",
           ml: "10px",
+          fontSize: "14px",
+          [theme.breakpoints.down("sm")]: {
+            fontSize: "12px",
+          },
         }}
       >
         <Typography
           sx={{
-            fontSize: "14px",
-            fontFamily: "Arial, Helvetica, sans-serif",
+            fontSize: "inherit",
+            whiteSpace: "nowrap",
           }}
         >
-          Zoom Level:
-          <Box component="span" sx={{ color: "aqua", mr: "8px" }}>
-            {zoomLevel}
-          </Box>
+          بزرگ نمایی :
+        </Typography>
+
+        <Typography
+          sx={{
+            fontSize: "inherit",
+            color: "aqua",
+            mr: "6px",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+        >
+          {zoomLevel}
         </Typography>
       </Box>
     </Box>
   );
 };
 
-export default MapCoordinates;
+export default CoordinatesBox;
